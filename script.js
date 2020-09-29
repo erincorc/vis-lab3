@@ -50,7 +50,10 @@ circ = svg.selectAll("population-plot")
         if (euro.population < 1000000) return 4;
         else return 8;
       })
-      .attr("fill", "blue");
+      .attr("fill", euro=> {
+        if (euro.population >= 1000000) return "blue";
+        else return "gray";
+      });
 
 bigCities = euro.filter(e => (e.eu == true && e.population >= 1000000));
 
@@ -74,6 +77,7 @@ text = circ.select("text")
 //load data
 let buildings;
 let bars;
+let bartext;
 
 const barheight = 500;
 const barwidth = 500;
@@ -97,10 +101,22 @@ d3.csv('buildings.csv').then(b => {
       .enter()
       .append("rect")
       .attr("width", buildings=>buildings.height_px)
-      .attr("height", 20)
-      .attr("x", 200)
+      .attr("height", 40)
+      .attr("x", 250)
       .attr("y", function(buildings,i){
-        return 25*(i+1);
+        return 45*(i+1);
       })
       .attr("fill", "green");
+bartext = bars.select("text")
+      .data(buildings)
+      .enter()
+      .append("text")
+      .attr('x', 0)
+      .attr('y', function(buildings,i){
+        return 45*(i+1)+22.5;
+      })
+      .text(buildings => buildings.building)
       });
+  
+
+
