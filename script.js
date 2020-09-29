@@ -50,18 +50,41 @@ circ = svg.selectAll("population-plot")
         if (euro.population < 1000000) return 4;
         else return 8;
       });
-bigCities = euro.filter(e => (e.eu == true && e.population >1000000));
+bigCities = euro.filter(e => (e.eu == true && e.population >= 1000000));
+
+// maybe add tooltip?
+
 text = circ.select("text")
       .data(bigCities)
       .enter()
       .append("text")
       .attr('x', bigCities => bigCities.x)
-      .attr('y', bigCities => bigCities.y)
-      .text(bigCities.city)
+      .attr('y', bigCities => bigCities.y-10)
+      .text( bigCities =>bigCities.city)
       .attr('font-size', "11px")
-      .attr('text-anchor', 'middle');
-      
-})
+      .attr('text-anchor', 'middle')
+      .attr('fill', 'red');   
+});
+
+// now bar chart:
+
+//load data
+let buildings;
+d3.csv('buildings.csv').then(b => {
+  console.log('building info ', b);
+}).then(b => {
+  console.log('b', b);
+  buildings = b;
+  buildings.sort(function(a,b) {
+    let heightA = a.height_m;
+    let heightB = b.height_m;
+    if (heightA < heightB) return 1;
+    if (heightA > heightB) return -1;
+    return 0;
+  })
+  console.log(buildings);
+});
+
 
 
 
