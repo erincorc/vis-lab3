@@ -26,13 +26,12 @@ let bigCities;
 let text;
 const width = 700;
 const height = 550; 
+
 d3.csv('cities.csv').then(function(data) {
     euro = content.filter(c => c.eu == true); //filter out any non-EU countries
     console.log(euro);
 }).then(function(d) {
   d3.select('.city-count').text('Number of European cities: ' + 28);
- // const width = 700;
- // const height = 550;
   const svg = d3.select('.population-plot')
       .append('svg')
       .attr('width', width)
@@ -50,7 +49,9 @@ circ = svg.selectAll("population-plot")
       .attr('r', euro => {
         if (euro.population < 1000000) return 4;
         else return 8;
-      });
+      })
+      .attr("fill", "blue");
+
 bigCities = euro.filter(e => (e.eu == true && e.population >= 1000000));
 
 // maybe add tooltip?
@@ -72,6 +73,11 @@ text = circ.select("text")
 
 //load data
 let buildings;
+let bars;
+
+const barheight = 500;
+const barwidth = 500;
+
 d3.csv('buildings.csv').then(b => {
   buildings = b;
   console.log('building info ', b);
@@ -80,11 +86,21 @@ d3.csv('buildings.csv').then(b => {
     return b.height_m - a.height_m;
   })
   console.log('buildings', buildings);
-});
-
-
-
-
-
-
-
+}).then(b => {
+  d3.select('.buildings-intro').text('Here are the tallest buildings in the world!'); // add some text to break up page
+  const svg2 = d3.select('.building-height')
+      .append('svg')
+      .attr('width', barwidth)
+      .attr('height', barheight)
+  bars = svg2.selectAll('building-height')
+      .data(buildings)
+      .enter()
+      .append("rect")
+      .attr("width", buildings=>buildings.height_px)
+      .attr("height", 20)
+      .attr("x", 200)
+      .attr("y", function(buildings,i){
+        return 25*(i+1);
+      })
+      .attr("fill", "green");
+      });
