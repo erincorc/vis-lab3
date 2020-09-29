@@ -24,14 +24,15 @@ let euro;
 let circ;
 let bigCities;
 let text;
-
+const width = 700;
+const height = 550; 
 d3.csv('cities.csv').then(function(data) {
     euro = content.filter(c => c.eu == true); //filter out any non-EU countries
     console.log(euro);
 }).then(function(d) {
   d3.select('.city-count').text('Number of European cities: ' + 28);
-  const width = 700;
-  const height = 550;
+ // const width = 700;
+ // const height = 550;
   const svg = d3.select('.population-plot')
       .append('svg')
       .attr('width', width)
@@ -54,6 +55,7 @@ bigCities = euro.filter(e => (e.eu == true && e.population >= 1000000));
 
 // maybe add tooltip?
 
+// city labels 
 text = circ.select("text")
       .data(bigCities)
       .enter()
@@ -71,20 +73,14 @@ text = circ.select("text")
 //load data
 let buildings;
 d3.csv('buildings.csv').then(b => {
-  console.log('building info ', b);
-}).then(b => {
-  console.log('b', b);
   buildings = b;
-  buildings.sort(function(a,b) {
-    let heightA = a.height_m;
-    let heightB = b.height_m;
-    if (heightA < heightB) return 1;
-    if (heightA > heightB) return -1;
-    return 0;
+  console.log('building info ', b);
+}).then(b =>{ //sort data
+  buildings.sort(function(a,b){
+    return b.height_m - a.height_m;
   })
-  console.log(buildings);
+  console.log('buildings', buildings);
 });
-
 
 
 
