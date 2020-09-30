@@ -69,6 +69,7 @@ text = circ.select("text")
       .text( bigCities =>bigCities.city)
       .attr('font-size', "11px")
       .attr('text-anchor', 'middle')
+      .attr('font-wight', 'bold')
       .attr('fill', 'red');   
 });
 
@@ -111,11 +112,13 @@ bartext = bars.select("text")
       .data(buildings)
       .enter()
       .append("text")
-      .attr('x', 0)
+      .attr('x', 240)
       .attr('y', function(buildings,i){
         return 45*(i+1)+22.5;
       })
+      .attr('text-anchor', 'end')
       .text(buildings => buildings.building)
+      
       });
   
 
