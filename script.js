@@ -79,6 +79,7 @@ text = circ.select("text")
 let buildings;
 let bars;
 let bartext;
+let heighttext;
 
 const barheight = 500;
 const barwidth = 500;
@@ -117,8 +118,35 @@ bartext = bars.select("text")
         return 45*(i+1)+22.5;
       })
       .attr('text-anchor', 'end')
-      .text(buildings => buildings.building)
-      
+      .text(buildings => buildings.building);
+bartext.append("text")
+      .text(buldings => buildings.height_ft , "ft")
+      .attr('x', buildings => {
+        return 300;
+        //return 250 + buildings.height_px;
+      })
+      .attr('y', function(buildings, i) {
+        return 45*(i+1) + 22.5;
+      })
+      .attr('text-anchor', 'end')
+      //.text(buildings => buildings.height_ft)
+      .text('ft')
+      .attr('fill', 'black'); 
+
+/*heighttext = bars.selectAll("text2")
+      .data(buildings)
+      .enter()
+      .append("text2")
+      .attr('x', buildings => {
+        return 300;
+        //return 250 + buildings.height_px;
+      })
+      .attr('y', function(buildings, i) {
+        return 45*(i+1) + 22.5;
+      })
+      .attr('text-anchor', 'end')
+      .text(buildings => (buildings.height_ft, 'ft'))
+      .attr('fill', 'black'); */
       });
   
 
