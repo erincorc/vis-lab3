@@ -109,6 +109,7 @@ d3.csv('buildings.csv').then(b => {
         return 45*(i+1);
       })
       .attr("fill", "green");
+
 bartext = bars.select("text")
       .data(buildings)
       .enter()
@@ -119,34 +120,18 @@ bartext = bars.select("text")
       })
       .attr('text-anchor', 'end')
       .text(buildings => buildings.building);
-bartext.append("text")
-      .text(buldings => buildings.height_ft , "ft")
-      .attr('x', buildings => {
-        return 300;
-        //return 250 + buildings.height_px;
-      })
-      .attr('y', function(buildings, i) {
-        return 45*(i+1) + 22.5;
-      })
-      .attr('text-anchor', 'end')
-      //.text(buildings => buildings.height_ft)
-      .text('ft')
-      .attr('fill', 'black'); 
 
-/*heighttext = bars.selectAll("text2")
+bartext = bars.select("text")
       .data(buildings)
       .enter()
-      .append("text2")
-      .attr('x', buildings => {
-        return 300;
-        //return 250 + buildings.height_px;
-      })
-      .attr('y', function(buildings, i) {
-        return 45*(i+1) + 22.5;
+      .append("text")
+      .attr('x', 280)
+      .attr('y', function(buildings,i){
+        return 45*(i+1)+22.5;
       })
       .attr('text-anchor', 'end')
-      .text(buildings => (buildings.height_ft, 'ft'))
-      .attr('fill', 'black'); */
+      .text(buildings => buildings.height_ft);
+
       });
   
 
