@@ -81,7 +81,7 @@ let bars;
 let bartext;
 let heighttext;
 let labeltext;
-
+let interact;
 const barheight = 500;
 const barwidth = 500;
 
@@ -99,7 +99,8 @@ d3.csv('buildings.csv').then(b => {
       .append('svg')
       .attr('width', barwidth)
       .attr('height', barheight)
-  bars = svg2.selectAll('building-height')
+  bars = svg2.selectAll('.bar')
+  //bars = svg2.selectAll('building-height')
       .data(buildings)
       .enter()
       .append("rect")
@@ -109,7 +110,18 @@ d3.csv('buildings.csv').then(b => {
       .attr("y", function(buildings,i){
         return 45*(i+1);
       })
-      .attr("fill", "green");
+      .attr("fill", "green")
+      //.append('rect')
+      .attr('class', 'bar')
+      .on("click", (b) => {
+        let build = b.path[0].__data__;
+        console.log(build);
+        d3.select(".image")
+          .attr('src', (b,i) => {
+            return 'img/'+build.image});
+        d3.select(".building-name")
+          .attr("text", b => build.building);
+      }) ;
 
 bartext = bars.select("text")
       .data(buildings)
@@ -132,20 +144,9 @@ heighttext = bars.select("text")
       })
       .attr('text-anchor', 'end')
       .attr('fill', 'white')
-      .text(buildings=> buildings.height_ft);
-labeltext = bars.select("text")
-      .data(buildings)
-      .enter()
-      .append("text")
-      .attr('x', 360)
-      .attr('y', function(buildings,i){
-        return 45*(i+1)+22.5;
-      })
-      .attr('text-anchor', 'end')
-      .attr('fill', 'white')
-      .text(' ft');
-      
-    
+      .text(buildings=> {
+        return buildings.height_ft + " ft"
+      });
     
     });
   
