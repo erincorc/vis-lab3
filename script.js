@@ -80,6 +80,7 @@ let buildings;
 let bars;
 let bartext;
 let heighttext;
+let labeltext;
 
 const barheight = 500;
 const barwidth = 500;
@@ -121,18 +122,32 @@ bartext = bars.select("text")
       .attr('text-anchor', 'end')
       .text(buildings => buildings.building);
 
-bartext = bars.select("text")
+heighttext = bars.select("text")
       .data(buildings)
       .enter()
       .append("text")
-      .attr('x', 280)
+      .attr('x', 340)
       .attr('y', function(buildings,i){
         return 45*(i+1)+22.5;
       })
       .attr('text-anchor', 'end')
-      .text(buildings => buildings.height_ft);
-
-      });
+      .attr('fill', 'white')
+      .text(buildings=> buildings.height_ft);
+labeltext = bars.select("text")
+      .data(buildings)
+      .enter()
+      .append("text")
+      .attr('x', 360)
+      .attr('y', function(buildings,i){
+        return 45*(i+1)+22.5;
+      })
+      .attr('text-anchor', 'end')
+      .attr('fill', 'white')
+      .text(' ft');
+      
+    
+    
+    });
   
 
 
