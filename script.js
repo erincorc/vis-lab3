@@ -51,8 +51,8 @@ circ = svg.selectAll("population-plot")
         else return 8;
       })
       .attr("fill", euro=> {
-        if (euro.population >= 1000000) return "blue";
-        else return "gray";
+        if (euro.population >= 1000000) return "#967bb6";
+        else return "#9bb67b";
       });
 
 bigCities = euro.filter(e => (e.eu == true && e.population >= 1000000));
@@ -70,7 +70,7 @@ text = circ.select("text")
       .attr('font-size', "11.5px")
       .attr('text-anchor', 'middle')
       .attr('font-weight', 'bold')
-      .attr('fill', 'red');   
+      .attr('fill', 'black');   
 });
 
 // now bar chart:
@@ -110,7 +110,7 @@ d3.csv('buildings.csv').then(b => {
       .attr("y", function(buildings,i){
         return 45*(i+1);
       })
-      .attr("fill", "green")
+      .attr("fill", "#FFB6C1")
       //.append('rect')
       .attr('class', 'bar')
       .on("click", (b) => {
