@@ -120,7 +120,18 @@ d3.csv('buildings.csv').then(b => {
           .attr('src', (b,i) => {
             return 'img/'+build.image});
         d3.select(".building-name")
-          .attr("text", b => build.building);
+          .text(b => build.building)
+          .attr('text-anchor', 'middle');
+        d3.select(".height")
+          .text(b=>build.height_ft);
+        d3.select(".city")
+          .text(b=>build.city);
+        d3.select(".country")
+          .text(b=>build.country);
+        d3.select(".floors")
+          .text(b=>build.floors);
+        d3.select(".completed")
+          .text(b=>build.completed);
       }) ;
 
 bartext = bars.select("text")
