@@ -67,9 +67,9 @@ text = circ.select("text")
       .attr('x', bigCities => bigCities.x)
       .attr('y', bigCities => bigCities.y-10)
       .text( bigCities =>bigCities.city)
-      .attr('font-size', "11px")
+      .attr('font-size', "11.5px")
       .attr('text-anchor', 'middle')
-      .attr('font-wight', 'bold')
+      .attr('font-weight', 'bold')
       .attr('fill', 'red');   
 });
 
@@ -114,6 +114,7 @@ d3.csv('buildings.csv').then(b => {
       //.append('rect')
       .attr('class', 'bar')
       .on("click", (b) => {
+        console.log(b);
         let build = b.path[0].__data__;
         console.log(build);
         d3.select(".image")
@@ -143,6 +144,7 @@ bartext = bars.select("text")
         return 45*(i+1)+22.5;
       })
       .attr('text-anchor', 'end')
+      .attr('fill', 'gray')
       .text(buildings => buildings.building);
 
 heighttext = bars.select("text")
